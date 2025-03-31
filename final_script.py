@@ -95,6 +95,7 @@ def print_new_messages():
                         'message': {
                             'text': f'@{sender}'
                             'sender_id': SENDER_ID
+                        },
                 }
 
                 response = requests.post(https://image.groupme.com/pictures?url=https://en.wikipedia.org/wiki/File:Buddy_christ.jpg, headers=headers, data=data, json=json_data, params=params)
