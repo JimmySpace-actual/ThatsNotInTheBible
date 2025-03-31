@@ -21,7 +21,7 @@ int main(){
     set<string> uniqueWords;
 
     char zero = '0' , one = '1', two = '2', three = '3', four = '4', five = '5', six = '6', seven = '7', eight = '8', nine = '9';
-    char com = ',', op = '(', cp = ')', ob = '[', cb = ']', col = ':', p = '.', sc = ';', qm = '?', em = '!' ;
+    char com = ',', op = '(', cp = ')', ob = '[', cb = ']', col = ':', p = '.', sc = ';', qm = '?', em = '!', ap = '\'';
 
 
 
@@ -46,6 +46,8 @@ int main(){
         word.erase(remove(word.begin(), word.end(), sc), word.end());
         word.erase(remove(word.begin(), word.end(), qm), word.end());
         word.erase(remove(word.begin(), word.end(), em), word.end());
+        word.erase(remove(word.begin(), word.end(), ap), word.end());
+
         for(char &c : word){
             c = tolower(c);
         }
