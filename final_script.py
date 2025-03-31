@@ -7,20 +7,16 @@ import os
 ACCESS_TOKEN = sys.argv[1]  # Your GroupMe bot access token
 GROUP_ID = sys.argv[2]  # The ID of your GroupMe group
 # BOT_ID = sys.argv[3]  # Bot ID from command line argument
-SENDER_ID = 0#sys.argv[3]  # Sender ID from command line argument
+SENDER_ID = sys.argv[3]  # Sender ID from command line argument
 MESSAGE = "NONE of these words are in The Bible."
 
 def get_messages(after_id):
     """Fetch the latest messages from the GroupMe group using the bot."""
     url = f"https://api.groupme.com/v3/groups/{GROUP_ID}/messages"
     if after_id == None:
-        params = {"token": ACCESS_TOKEN, "limit": 20}  # Get the last  messages
+        params = {"token": ACCESS_TOKEN, "limit": 1}  # Get the last  messages
         response = requests.get(url, params=params)
         if response.status_code == 200:
-            message_temps = response.json()["response"]["messages"]
-            print(type(message_temp))
-            for message_temp in message_temps:
-                print(message_temp['user_id'])
             return response.json()["response"]["messages"]
         else:
             print(f"Error fetching messages: {response.status_code} - {response.text}")
@@ -50,15 +46,13 @@ def print_new_messages():
                 if after_id is not None and after_id == message["id"]:
                     continue
                 after_id = message["id"]
-                if message["sender_type"] == "bot":
-                    continue
                 print(f"New message: {message['text']} from {message['name']}")
                 message_words = message["text"].lower().split()
                 message_set = set(message_words)
                 #for elem in message_set:
                     #print(elem)
                 #print(message_set & words)
-                sender = messages["user_id"] #id of the person who sent the last message so that they can be specifically called out by God
+                sender = message["user_id"] #id of the person who sent the last message so that they can be specifically called out by God
                 if message_set & words != set():
                     impurity = 100 * ((len(message_set) - (len(message_set & words))) / (len(message_set)))
 
@@ -80,25 +74,30 @@ def print_new_messages():
                         }
 
                         response = requests.post(f'https://api.groupme.com/v3/groups/{GROUP_ID}/messages', params=params, headers=headers, json=json_data)
+                        if response.status_code == 201:
+                            message_post = response.json()["response"]["message"]
+                            after_id = message_post['id']
+                    else:
+                        headers = {
+                            # Already added when you pass json=
+                            # 'Content-Type': 'application/json',
+                        }
 
-                    headers = {
-                        # Already added when you pass json=
-                        # 'Content-Type': 'application/json',
-                    }
+                        params = {
+                            'token': ACCESS_TOKEN,
+                        }
 
-                    params = {
-                        'token': ACCESS_TOKEN,
-                    }
+                        json_data = {
+                            'message': {
+                                'text': f'@{sender} Your thoughts are {impurity}% impure',
+                                'sender_id': SENDER_ID,
+                            },
+                        }
 
-                    json_data = {
-                        'message': {
-                            'text': f'@{sender} Your thoughts are {impurity}% impure',
-                            'sender_id': SENDER_ID,
-                        },
-                    }
-
-                    response = requests.post(f'https://api.groupme.com/v3/groups/{GROUP_ID}/messages', params=params, headers=headers, json=json_data)
-
+                        response = requests.post(f'https://api.groupme.com/v3/groups/{GROUP_ID}/messages', params=params, headers=headers, json=json_data)
+                        if response.status_code == 201:
+                            message_post = response.json()["response"]["message"]
+                            after_id = message_post['id']
 
 
                 elif message_set == set() and messages["attachments"] != "": #idk if I'm reading the attachments correctly, but the idea here is if someone sends an image or video without text we respond with an image
@@ -122,7 +121,7 @@ def print_new_messages():
                         },
                     }
 
-                    #response = requests.post(https://image.groupme.com/pictures?url=https://en.wikipedia.org/wiki/File:Buddy_christ.jpg, headers=headers, data=data, json=json_data, params=params)
+                    response = requests.post(f'https://image.groupme.com/pictures?url=https://en.wikipedia.org/wiki/File:Buddy_christ.jpg', headers=headers, data=data, json=json_data, params=params)
                 else: #if NONE of the words are in the bible
                     # Respond to the test message
                     # curl_command = f"curl -d '{"text" : "Your message here", "bot_id" : "e20619c8b4652348f8511c2349"}' https://api.groupme.com/v3/bots/post"
@@ -144,6 +143,9 @@ def print_new_messages():
                     }
 
                     response = requests.post(f'https://api.groupme.com/v3/groups/{GROUP_ID}/messages', params=params, headers=headers, json=json_data)
+                    if response.status_code == 201:
+                        message_post = response.json()["response"]["message"]
+                        after_id = message_post['id']
 
                         
                         # os.system(curl_command)
@@ -153,8 +155,7 @@ def print_new_messages():
         time.sleep(1)  # Poll every 1 seconds
 
 if __name__ == "__main__":
-    get_messages(None)
-    #print_new_messages()
+    print_new_messages()
 
 #curl -d '{"text" : "Your message here", "bot_id" : "e20619c8b4652348f8511c2349"}' https://api.groupme.com/v3/bots/post
 # import requests
