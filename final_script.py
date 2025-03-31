@@ -51,12 +51,53 @@ def print_new_messages():
                 print(f"New message: {message['text']} from {message['name']}")
                 message_words = message["text"].lower().split()
                 message_set = set(message_words)
-                for elem in message_set:
-                    print(elem)
-                print(message_set & words)
+                #for elem in message_set:
+                    #print(elem)
+                #print(message_set & words)
+                sender = messages["user_id"]
                 if message_set & words != set():
-                    continue
-                    
+                    impurity = 100 * ((len(message_set) - (len(message_set & words))) / (len(message_set)))
+                    headers = {
+                        # Already added when you pass json=
+                        # 'Content-Type': 'application/json',
+                    }
+
+                    params = {
+                        'token': ACCESS_TOKEN,
+                    }
+
+                    json_data = {
+                        'message': {
+                            'text': f'@{sender} Your thoughts are {impurity}% impure'
+                            'sender_id': SENDER_ID,
+                        },
+                    }
+
+                    response = requests.post(f'https://api.groupme.com/v3/groups/{GROUP_ID}/messages', params=params, headers=headers, json=json_data)
+
+
+
+                elif message_set == set() and messages["attachments"] != "":
+                #maybe randint this, have like 15 photos at the ready or something and respond with a random one. but for now I'm just gonna go with buddy jesus
+                headers = {
+                    'X-Access-Token': os.getenv(ACCESS_TOKEN, ''),
+                    'Content-Type': 'image/jpeg',
+                }
+
+                with open('Buddy_christ.jpg', 'rb') as f:
+                    data = f.read()
+
+                params = {
+                        'token': ACCESS_TOKEN,
+                    }
+                
+                json_data = {
+                        'message': {
+                            'text': f'@{sender}'
+                            'sender_id': SENDER_ID
+                }
+
+                response = requests.post(https://image.groupme.com/pictures?url=https://en.wikipedia.org/wiki/File:Buddy_christ.jpg, headers=headers, data=data, json=json_data, params=params)
                 else:
                     # Respond to the test message
                     # curl_command = f"curl -d '{"text" : "Your message here", "bot_id" : "e20619c8b4652348f8511c2349"}' https://api.groupme.com/v3/bots/post"
