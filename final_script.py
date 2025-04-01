@@ -74,7 +74,7 @@ def print_new_messages():
 
                         json_data = {
                             'message' : {
-                                'text' :f'@{sender} You are a pure soul, a holy spirit, the smallest beacon of light in this hellish abyss, the only Saint to be found in this land of sinners. The Gates of Heaven are open to you and you alone.',
+                                'text' :f'@{sender} You are a pure soul, a holy spirit, a bright beacon of light in this hellish abyss, the only Saint to be found in this land of Sinners. The Gates of Heaven are open to you and you alone, welcome to My Kingdom child.',
                                 'sender_id' : SENDER_ID
                             },
                         }
