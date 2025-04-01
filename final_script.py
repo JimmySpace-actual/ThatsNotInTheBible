@@ -9,7 +9,6 @@ ACCESS_TOKEN = sys.argv[1]  # Your GroupMe bot access token
 GROUP_ID = sys.argv[2]  # The ID of your GroupMe group
 # BOT_ID = sys.argv[3]  # Bot ID from command line argument
 SENDER_ID = 0#sys.argv[3]  # Sender ID from command line argument
-MESSAGE = "NONE of these words are in The Bible. Let my Light into your life or you will be going to Hell"
 
 def get_messages(after_id):
     """Fetch the latest messages from the GroupMe group using the bot."""
@@ -75,7 +74,7 @@ def print_new_messages():
 
                         json_data = {
                             'message' : {
-                                'text' :f'@{sender} You are a pure soul, a holy spirit, a beacon of My Light in the dark depths of this Hell',
+                                'text' :f'@{sender} You are a pure soul, a holy spirit, the smallest beacon of light in this hellish abyss, the only Saint to be found in this land of sinners. The Gates of Heaven are open to you and you alone.',
                                 'sender_id' : SENDER_ID
                             },
                         }
@@ -106,7 +105,7 @@ def print_new_messages():
                 #maybe randint this, have like 15 photos at the ready or something and respond with a random one. but for now I'm just gonna go with buddy jesus
                 #currently can't tell how to process the image, I found something which lets me send a link to groupme in the post request but idk if I formatted that right and I also found something to have the
                 #image as an opened file here that gets sent to groupme. RN this code does both which I think is DEFINITELY wrong. The post request is spitting out errors I know that much
-                    rando = random.randint(0,5)
+                    rando = random.randint(0,6)
                     if rando == 0:
                         headers = {
                             'X-Access-Token': os.getenv(ACCESS_TOKEN, ''),
@@ -230,6 +229,27 @@ def print_new_messages():
                         #response = requests.post(https://image.groupme.com/pictures?url=<https://eyestoseetherevelation.com/wp-content/uploads/2022/12/EDHH93-1280x640.jpg>, headers=headers, json=json_data, params=params)
                         continue
 
+                    elif rando == 6:
+                        #https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZhOBCe0Sc0hkm36i0QqyznzJ7LwjTTKEawujCQDcIZQzg2nred260UMzrjp1Dt7gQCMMlO3bNZ_LJVoCxHPruET0Z4DvnEN3acA8ZcStSlxreLsVZFc0LIUkdbEyZTNTCsfkZdJuY-rY/s400/Jesus-Christ-Limpias-Spain.jpg
+                        headers = {
+                            'X-Access-Token': os.getenv(ACCESS_TOKEN, ''),
+                            'Content-Type': 'image/jpeg'
+                        }
+
+                        params = {
+                                'token': ACCESS_TOKEN,
+                            }
+                    
+                        json_data = {
+                                'message': {
+                                    'text': f'@{sender}',
+                                    'sender_id': SENDER_ID
+                            },
+                        }
+                        #response = requests.post(https://image.groupme.com/pictures?url=<https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZhOBCe0Sc0hkm36i0QqyznzJ7LwjTTKEawujCQDcIZQzg2nred260UMzrjp1Dt7gQCMMlO3bNZ_LJVoCxHPruET0Z4DvnEN3acA8ZcStSlxreLsVZFc0LIUkdbEyZTNTCsfkZdJuY-rY/s400/Jesus-Christ-Limpias-Spain.jpg>, headers=headers, json=json_data, params=params)
+                        continue
+
+
                 else: #if NONE of the words are in the bible
                     # Respond to the test message
                     # curl_command = f"curl -d '{"text" : "Your message here", "bot_id" : "e20619c8b4652348f8511c2349"}' https://api.groupme.com/v3/bots/post"
@@ -245,7 +265,7 @@ def print_new_messages():
 
                     json_data = {
                         'message': {
-                            'text': MESSAGE,
+                            'text': f'@{sender} NONE of these words are in The Bible, you are going straight to Hell',
                             'sender_id': SENDER_ID,
                         },
                     }
