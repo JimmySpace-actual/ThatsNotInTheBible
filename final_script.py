@@ -8,7 +8,7 @@ import random
 ACCESS_TOKEN = sys.argv[1]  # Your GroupMe bot access token
 GROUP_ID = sys.argv[2]  # The ID of your GroupMe group
 # BOT_ID = sys.argv[3]  # Bot ID from command line argument
-SENDER_ID = 0#sys.argv[3]  # Sender ID from command line argument
+SENDER_ID = sys.argv[3]#sys.argv[3]  # Sender ID from command line argument
 
 def get_messages(after_id):
     """Fetch the latest messages from the GroupMe group using the bot."""
