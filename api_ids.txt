@@ -1,0 +1,13 @@
+Quinn - username - The Lord,   sender_id = 33430670, api_key = R2QcJ19qiat8tkpKQuDEvzhnQM9qHRT4OSAWmalg
+aku - username - aku, sender_id = 92013354, api_key = mRUpT79aaWG9pHwh0PHsmFfQRGs98cf4Pjx5U8if
+sharvil - username - sharvil garg, sender_id = 87420923, api_key = O9vginZtiDYr5tv0vmnicNJpJhXPK2rBoLOWOS8J
+delilah - username - laurne's (ex) gf, sender_id = 60196582, api_key = qUNNXF1c0sTZjQ6q2dUuAhI54h4pkHwHa2k5iBMJ
+
+
+Group Ids 
+jackal id = 95692682
+dactyl id = 105480301
+scarab id = 102133880
+boldy id = 53559464
+potato id = 102745888
+pranktest id = 106874570
