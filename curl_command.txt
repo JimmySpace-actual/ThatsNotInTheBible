@@ -1,0 +1,24 @@
+boldy
+curl -X POST "https://api.groupme.com/v3/groups/53559464/messages?token=R2QcJ19qiat8tkpKQuDEvzhnQM9qHRT4OSAWmalg" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": {\"text\": \"The Lord has to go on a date now, so I will be taking your leave.\"}}"
+
+scarab
+  curl -X POST "https://api.groupme.com/v3/groups/102133880/messages?token=mRUpT79aaWG9pHwh0PHsmFfQRGs98cf4Pjx5U8if" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": {\"text\": \"The Lord has to go on a date now, so I will be taking your leave.\"}}"
+
+dactyl
+  curl -X POST "https://api.groupme.com/v3/groups/105480301/messages?token=R2QcJ19qiat8tkpKQuDEvzhnQM9qHRT4OSAWmalg" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": {\"text\": \"The Lord has to go on a date now, so I will be taking your leave.\"}}"
+
+jackal
+  curl -X POST "https://api.groupme.com/v3/groups/95692682/messages?token=qUNNXF1c0sTZjQ6q2dUuAhI54h4pkHwHa2k5iBMJ" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": {\"text\": \"The Lord has to go on a date now, so I will be taking your leave.\"}}"
+
+potato
+  curl -X POST "https://api.groupme.com/v3/groups/102745888/messages?token=O9vginZtiDYr5tv0vmnicNJpJhXPK2rBoLOWOS8J" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": {\"text\": \"The Lord has to go on a date now, so I will be taking your leave.\"}}"
